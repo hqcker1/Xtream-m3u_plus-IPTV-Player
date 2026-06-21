@@ -567,6 +567,7 @@ class IPTVPlayerApp(QMainWindow):
             itemFav = QListWidgetItem(self.fav_categories_text)
             itemFav.setData(Qt.UserRole, {'category_name': self.fav_categories_text})
             self.category_list_widgets[stream_type].insertItem(1, itemFav)
+            self.category_fav_widget_items[stream_type] = itemFav
 
         self.animate_progress(0, 100, f"Finished sorting {stream_type} {list_content_type}")
 
@@ -601,6 +602,7 @@ class IPTVPlayerApp(QMainWindow):
             'Movies': self.category_list_movies,
             'Series': self.category_list_series,
         }
+        self.category_fav_widget_items = {}
 
         #Configure visuals of the lists
         standard_icon_size = QSize(24, 24)
@@ -1409,6 +1411,10 @@ class IPTVPlayerApp(QMainWindow):
 
             #Sort streaming list
             self.sortList(self.streaming_search_bars[stream_type], 'streaming', stream_type, self.streaming_list_widgets, self.sorting_enabled, self.sorting_order)
+
+        for stream_type in self.category_fav_widget_items.keys():
+            self.category_list_widgets[stream_type].setCurrentItem(self.category_fav_widget_items[stream_type])
+            self.category_list_widgets[stream_type].itemClicked.emit(self.category_fav_widget_items[stream_type])
 
         self.set_progress_bar(100, f"Finished loading")
         QtWidgets.qApp.processEvents()
