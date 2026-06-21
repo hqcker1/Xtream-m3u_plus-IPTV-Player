@@ -3,6 +3,82 @@
 ![GitHub License](https://img.shields.io/github/license/Youri666/Xtream-m3u_plus-IPTV-Player?label=License&logo=github)
 ![GitHub stars](https://img.shields.io/github/stars/Youri666/Xtream-m3u_plus-IPTV-Player)
 
+# Run XTREME IPTV Player from Source on Windows 10
+
+## Prerequisites
+
+Install:
+
+* Python 3.11 64-bit
+* Git for Windows
+* VLC Media Player
+
+Do **not** use Python 3.13 for this project. `lxml==4.9.2` may try to compile from source and fail on Windows.
+
+## Setup
+
+Open **PowerShell** in the project folder.
+
+Check available Python versions:
+
+```powershell
+py -0p
+```
+
+If Python 3.11 is missing, install it:
+
+```powershell
+winget install --id Python.Python.3.11 -e
+```
+
+Create a virtual environment with Python 3.11:
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+If PowerShell blocks activation, run:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Then activate again.
+
+Upgrade pip tools:
+
+```powershell
+python -m pip install --upgrade pip setuptools wheel
+```
+
+Install dependencies:
+
+```powershell
+python -m pip install requests==2.31.0 lxml==4.9.2 python-dateutil==2.8.2 PyQt5==5.15.9 qdarkstyle
+```
+
+Run the app:
+
+```powershell
+python ".\IPTV M3U_Plus PLAYER by MY-1.py"
+```
+
+## VLC Path
+
+Inside the app, choose VLC as the media player. The usual path is:
+
+```text
+C:\Program Files\VideoLAN\VLC\vlc.exe
+```
+
+## Notes
+
+Use HTTPS IPTV server URLs when possible.
+
+Avoid saving credentials in the app unless you are okay with them being stored locally in config files.
+
+
 # FREE OPENSOURCE M3U/XTREME IPTV PLAYER
 
 This IPTV player, built with Python and PyQt5, supports M3U_plus playlists and Xtream Codes API, allowing users to manage and play IPTV channels, movies, and series.
